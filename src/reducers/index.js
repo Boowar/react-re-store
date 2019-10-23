@@ -2,6 +2,21 @@ const initialState = {
   books: [],
   loading: true,
   error: null,
+  cartItems: [
+    {
+      id: 1,
+      name: "Book 1",
+      count: 3,
+      total: 100,
+    },
+    {
+      id: 2,
+      name: "Book 2",
+      count: 2,
+      total: 200,
+    },
+  ],
+  orderTotal: 300,
 }
 
 const reducer = (state = initialState, action) => {
