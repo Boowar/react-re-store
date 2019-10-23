@@ -1,3 +1,14 @@
+const updateCartItem = (book, item = {}, quantity) => {
+  const { id = book.id, count = 0, title = book.title, total = 0 } = item
+
+  return {
+    id,
+    title,
+    count: count + quantity,
+    total: total + quantity * book.price,
+  }
+}
+
 const updateCartItems = (cartItems, item, idx) => {
   if (item.count === 0) {
     return [...cartItems.slice(0, idx), ...cartItems.slice(idx + 1)]
@@ -8,17 +19,6 @@ const updateCartItems = (cartItems, item, idx) => {
   }
 
   return [...cartItems.slice(0, idx), item, ...cartItems.slice(idx + 1)]
-}
-
-const updateCartItem = (book, item = {}, quantity) => {
-  const { id = book.id, count = 0, title = book.title, total = 0 } = item
-
-  return {
-    id,
-    title,
-    count: count + quantity,
-    total: total + quantity * book.price,
-  }
 }
 
 const updateOrder = (state, bookId, quantity) => {
@@ -32,9 +32,16 @@ const updateOrder = (state, bookId, quantity) => {
   const item = cartItems[itemIndex]
 
   const newItem = updateCartItem(book, item, quantity)
+  const newItems = updateCartItems(cartItems, newItem, itemIndex)
+
+  const orderTotal = (total = 0) => {
+    newItems.map(item => (total += item.total))
+    return total
+  }
+
   return {
-    orderTotal: 0,
-    cartItems: updateCartItems(cartItems, newItem, itemIndex),
+    orderTotal: orderTotal(),
+    cartItems: newItems,
   }
 }
 
