@@ -5,7 +5,7 @@ import BookListItem from "../book-list-item"
 
 import { withBookstoreService } from "../hoc"
 import { booksLoaded } from "../../actions"
-import compose from "../../utils"
+import { compose } from "../../utils"
 
 import "./book-list.css"
 
