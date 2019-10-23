@@ -5,10 +5,17 @@ const booksLoaded = newBooks => {
   }
 }
 
-const booksRequested = newBooks => {
+const booksRequested = () => {
   return {
     type: "BOOKS_REQUESTED",
   }
 }
 
-export { booksLoaded, booksRequested }
+const booksError = error => {
+  return {
+    type: "BOOKS_ERROR",
+    payload: error,
+  }
+}
+
+export { booksLoaded, booksRequested, booksError }
