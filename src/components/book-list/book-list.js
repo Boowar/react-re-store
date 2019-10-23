@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import BookListItem from "../book-list-item"
+import { connect } from "react-redux"
 
 import "./book-list.css"
 
@@ -10,7 +11,7 @@ class BookList extends Component {
       <ul>
         {books.map(book => {
           return (
-            <li key='book.id'>
+            <li key={book.id}>
               <BookListItem book={book} />
             </li>
           )
@@ -20,4 +21,8 @@ class BookList extends Component {
   }
 }
 
-export default BookList
+const mapStateToProps = ({ books }) => {
+  return { books }
+}
+
+export default connect(mapStateToProps)(BookList)
